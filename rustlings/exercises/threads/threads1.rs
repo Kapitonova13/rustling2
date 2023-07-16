@@ -6,7 +6,7 @@
 // The program should wait until all the spawned threads have finished and
 // should collect their return values into a vector.
 
-// I AM NOT DONE
+
 
 use std::thread;
 use std::time::{Duration, Instant};
@@ -20,10 +20,12 @@ fn main() {
             println!("thread {} is complete", i);
             start.elapsed().as_millis()
         }));
+        
     }
 
     let mut results: Vec<u128> = vec![];
     for handle in handles {
+        results.push(handle.join().unwrap());
         // TODO: a struct is returned from thread::spawn, can you use it?
     }
 
@@ -35,4 +37,6 @@ fn main() {
     for (i, result) in results.into_iter().enumerate() {
         println!("thread {} took {}ms", i, result);
     }
+
+   
 }
